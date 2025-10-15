@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.hero {
+  background: linear-gradient(to right, #007bff, #00c6ff);
+}
+
+.cta {
+  background: linear-gradient(to right, #28a745, #34d058);
+}
+
+.card {
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+.carousel-item img {
+  height: 500px; /* Adjust this value as needed, e.g., 300px for smaller */
+  width: 100%;   /* Ensures it spans the full width of the carousel */
+  object-fit: cover; /* Crops the image to fit without distortion (options: contain, fill, etc.) */
+}
