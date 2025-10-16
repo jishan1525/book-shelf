@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { useUser } from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const CheckoutPage = () => {
@@ -10,48 +10,68 @@ const CheckoutPage = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const navigate = useNavigate();
 
-const handlePlaceOrder = () => {
-  if (!selectedAddress) {
-    alert("Please select a delivery address");
-    return;
-  }
+  const handlePlaceOrder = () => {
+    if (!selectedAddress) {
+      alert("Please select a delivery address");
+      return;
+    }
 
-  const newOrder = {
-    id: Date.now(),
-    items: cart,
-    totalPrice,
-    address: selectedAddress.addressLine,
-    date:new Date().toISOString()
+    const newOrder = {
+      id: Date.now(),
+      items: cart,
+      totalPrice,
+      address: selectedAddress.addressLine,
+      date: new Date().toISOString(),
+    };
+
+    addOrder(newOrder);
+    clearCart();
+    alert("Order placed successfully!");
+    navigate("/order-summary", { state: { order: newOrder } });
   };
 
-  addOrder(newOrder); 
-  clearCart();
-
- 
-  navigate("/order-summary", { state: { order: newOrder } });
-};
-
   return (
-    <div className="container mt-5">
-      <h3>Select Delivery Address</h3>
-      {addresses.map((addr) => (
-        <div key={addr.id} className="form-check">
-          <input
-            type="radio"
-            name="address"
-            value={addr.id}
-            onChange={() => setSelectedAddress(addr)}
-          />
-          <label className="form-check-label ms-2">
-            {addr.label}: {addr.addressLine}
-          </label>
-        </div>
-      ))}
+    <>
+      
+      <div className="container mt-5">
+        <h3 className="mb-4 fw-bold">Select Delivery Address</h3>
 
-      <button className="btn btn-success mt-3" onClick={handlePlaceOrder}>
-        Place Order
-      </button>
-    </div>
+        {(!addresses || addresses.length === 0) ? (
+          <div className="alert alert-danger">
+            No saved addresses found. Please add one from your Profile
+            
+          </div>
+        ) : (
+          addresses.map((addr) => (
+            <div key={addr.id} className="form-check mb-2">
+              <input
+                type="radio"
+                className="form-check-input"
+                name="address"
+                value={addr.id}
+                onChange={() => setSelectedAddress(addr)}
+              />
+              <label className="form-check-label ms-2">
+                <strong>{addr.label}:</strong> {addr.addressLine}
+              </label>
+            </div>
+          ))
+        )}
+
+        <div className="mt-4">
+          {addresses && addresses.length > 0 ? (
+            <button className="btn btn-success mb-4" onClick={handlePlaceOrder}>
+              Place Order
+            </button>
+          ) : (
+            <Link to="/profile" className="btn btn-primary mb-4">
+              Go to Profile
+            </Link>
+          )}
+        </div>
+        
+      </div>
+    </>
   );
 };
 

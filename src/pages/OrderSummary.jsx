@@ -25,8 +25,8 @@ const formatDate = (dateString) => {
 };
 
   return (
-    <div className="container mt-5 text-center">
-      <h2> Order Placed Successfully!</h2>
+    <div className="container mt-5">
+      <h2 className="text-center"> Order Placed Successfully!</h2>
       <p>
   <strong>Date:</strong> {formatDate(order.date)}
 </p>

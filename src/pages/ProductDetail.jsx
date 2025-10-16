@@ -20,7 +20,8 @@ const ProductDetail = () => {
     <div className="container mt-5 mb-4">
       <div className="row">
         
-        <div className="col-md-5">
+        {/* MODIFICATION HERE: Added 'text-center' to the column for mobile centering */}
+        <div className="col-md-5 text-center"> 
           <img
             src={bookData.image}
             alt={bookData.title}

@@ -53,7 +53,9 @@ const HomePage = () => {
                 <div className="card-body text-center">
                   <h5 className="card-title">Fiction</h5>
                   <p className="card-text">Immerse yourself in captivating stories.</p>
-                  <Link to="/products/Fiction" className="btn btn-outline-success">Explore</Link>
+                  <Link to={`/products?category=Fiction`} className="btn btn-outline-success">
+  Explore
+</Link>
                 </div>
               </div>
             </div>
@@ -62,7 +64,7 @@ const HomePage = () => {
                 <div className="card-body text-center">
                   <h5 className="card-title">Non-Fiction</h5>
                   <p className="card-text">Gain knowledge from real-world insights.</p>
-                  <Link to="/products/Non-Fiction" className="btn btn-outline-success">Explore</Link>
+                  <Link to="/products?category=Non-Fiction" className="btn btn-outline-success">Explore</Link>
                 </div>
               </div>
             </div>
@@ -71,7 +73,7 @@ const HomePage = () => {
                 <div className="card-body text-center">
                   <h5 className="card-title">Mystery</h5>
                   <p className="card-text">Solve puzzles and uncover secrets with your skill.</p>
-                  <Link to="/products/Mystery" className="btn btn-outline-success">Explore</Link>
+                  <Link to="/products?category=Mystery" className="btn btn-outline-success">Explore</Link>
                 </div>
               </div>
             </div>
@@ -80,7 +82,7 @@ const HomePage = () => {
                 <div className="card-body text-center">
                   <h5 className="card-title">Sci-Fi</h5>
                   <p className="card-text">Journey to futuristic worlds and science.</p>
-                  <Link to="/products/Sci-Fi" className="btn btn-outline-success">Explore</Link>
+                  <Link to="/products?category=Sci-Fi" className="btn btn-outline-success">Explore</Link>
                 </div>
               </div>
             </div>

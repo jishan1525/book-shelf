@@ -8,6 +8,14 @@ const ProductListing = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
+
+  //homepage to Lisitng page
+  const categoryFromURL = new URLSearchParams(location.search).get("category");
+  useEffect(() => {
+    if (categoryFromURL) {
+      setSelectedGenres([categoryFromURL]);
+    }
+  }, [categoryFromURL]);
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
 
@@ -53,7 +61,6 @@ const ProductListing = () => {
         Books ({filteredBooks.length})
       </h2>
       <div className="row">
-       
         <div className="col-md-3 mb-4">
           <div className="p-3 border rounded shadow-sm">
             <h5 className="fw-bold mb-3">Filters</h5>
@@ -110,42 +117,46 @@ const ProductListing = () => {
           </div>
         </div>
 
-       
         <div className="col-md-9">
           <div className="row g-4">
             {filteredBooks.length > 0 ? (
               filteredBooks.map((book) => (
                 <div key={book.id} className="col-lg-4 col-md-6 col-12">
-  <div className="card h-100 shadow-sm">
-    <Link to={`/detail/${book.id}`} className="text-decoration-none text-dark">
-      <img
-        src={book.image}
-        alt={book.title}
-        className="card-img-top"
-        style={{ height: "240px", objectFit: "cover" }}
-      />
-      <div className="card-body">
-        <h5 className="card-title">{book.title}</h5>
-        <p className="text-muted mb-1">{book.author}</p>
-        <p className="fw-bold text-success mb-1">₹{book.sellingPrice}</p>
-      </div>
-    </Link>
-    <div className="card-body">
-      <button
-        className="btn btn-primary btn-sm me-2"
-        onClick={() => addToCart(book)}
-      >
-        Add to Cart
-      </button>
-      <button
-        className="btn btn-outline-secondary btn-sm"
-        onClick={() => addToWishlist(book)}
-      >
-        Add to Wishlist
-      </button>
-    </div>
-  </div>
-</div>
+                  <div className="card h-100 shadow-sm">
+                    <Link
+                      to={`/detail/${book.id}`}
+                      className="text-decoration-none text-dark"
+                    >
+                      <img
+                        src={book.image}
+                        alt={book.title}
+                        className="card-img-top"
+                        style={{ height: "240px", objectFit: "cover" }}
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{book.title}</h5>
+                        <p className="text-muted mb-1">{book.author}</p>
+                        <p className="fw-bold text-success mb-1">
+                          ₹{book.sellingPrice}
+                        </p>
+                      </div>
+                    </Link>
+                    <div className="card-body">
+                      <button
+                        className="btn btn-primary btn-sm me-2"
+                        onClick={() => addToCart(book)}
+                      >
+                        Add to Cart
+                      </button>
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => addToWishlist(book)}
+                      >
+                        Add to Wishlist
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ))
             ) : (
               <p className="text-center text-muted">
