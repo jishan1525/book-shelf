@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const CartPage = () => {
   const {
@@ -16,32 +18,43 @@ const CartPage = () => {
 
   const { addToWishlist } = useWishlist();
   const navigate = useNavigate();
-  const [alert, setAlert] = useState("");
+  // const [alert, setAlert] = useState("");
 
-  const showAlert = (message) => {
-    setAlert(message);
-    setTimeout(() => setAlert(""), 1500);
-  };
 
   const handleRemove = (id, title) => {
     removeFromCart(id);
-    showAlert(`🗑️ Removed "${title}" from Cart`);
+    toast.success(`${title} removed from cart!`, {
+      position: "top-center",
+      autoClose: 1500,
+    });
   };
 
   const handleIncrease = (id, title) => {
     increaseQuantity(id);
-    showAlert(`Increased quantity of "${title}"`);
+    // showAlert(`Increased quantity of "${title}"`);
+    toast.success(`Increased quantity of ${title}`, {
+      position: "top-center",
+      autoClose: 1500,
+    });
   };
 
   const handleDecrease = (id, title) => {
     decreaseQuantity(id);
-    showAlert(`Decreased quantity of "${title}"`);
+    // showAlert(`Decreased quantity of "${title}"`);
+    toast.success(`Decreased quantity of ${title}`, {
+      position: "top-center",
+      autoClose: 1500,
+    });
   };
 
   const handleMoveToWishlist = (item) => {
     addToWishlist(item);
     removeFromCart(item.id);
-    showAlert(`Moved "${item.title}" to Wishlist`);
+    // showAlert(`Moved "${item.title}" to Wishlist`);
+    toast.success(`Moved "${item.title}" to Wishlist`, {
+      position: "top-center",
+      autoClose: 1500,
+    });
   };
 
   const handleCheckout = () => {
@@ -61,11 +74,7 @@ const CartPage = () => {
 
   return (
     <div className="container mt-5">
-      {alert && (
-        <div className="alert alert-success text-center fw-semibold">
-          {alert}
-        </div>
-      )}
+      
 
       <div className="row">
        
@@ -155,7 +164,7 @@ const CartPage = () => {
                 className="btn btn-outline-danger mt-2 w-100"
                 onClick={() => {
                   clearCart();
-                  showAlert(" Cleared all items from Cart");
+                  // showAlert(" Cleared all items from Cart");
                 }}
               >
                 Clear Cart

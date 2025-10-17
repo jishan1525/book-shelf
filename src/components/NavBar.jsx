@@ -9,16 +9,13 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
- 
   const searchParams = new URLSearchParams(location.search);
   const initialSearch = searchParams.get("search") || "";
-
   const [searchTerm, setSearchTerm] = useState(initialSearch);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-
 
     const params = new URLSearchParams(location.search);
     if (value.trim()) {
@@ -47,10 +44,9 @@ const NavBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
               <Link className="nav-link" to="/">
                 Home
               </Link>
@@ -62,9 +58,10 @@ const NavBar = () => {
             </li>
           </ul>
 
-          <div className="mx-auto d-flex align-items-center w-50">
+          {/* Search bar - responsive positioning */}
+          <div className="d-flex w-100 my-2 my-lg-0 mx-lg-auto" style={{ maxWidth: '400px' }}>
             <input
-              className="form-control mr-2"
+              className="form-control"
               type="search"
               placeholder="Search books by title or author..."
               value={searchTerm}
@@ -72,7 +69,7 @@ const NavBar = () => {
             />
           </div>
 
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link className="nav-link" to="/wishlist">
                 Wishlist ({wishlist.length})

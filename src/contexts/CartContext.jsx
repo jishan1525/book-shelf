@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const CartContext = createContext();
 
@@ -51,6 +52,10 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCart([]);
+    toast.success(`All items removed from cart!`, {
+          position: "top-center",
+          autoClose: 1500,
+        });
   };
 
   const totalPrice = cart.reduce(

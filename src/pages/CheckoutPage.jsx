@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigate, Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
   const { cart, totalPrice, clearCart } = useCart();
@@ -26,7 +26,12 @@ const CheckoutPage = () => {
 
     addOrder(newOrder);
     clearCart();
-    alert("Order placed successfully!");
+    //toast 
+    toast.success(`Order placed successfully!`, {
+      position: "top-center",
+      autoClose: 1500,
+    });
+
     navigate("/order-summary", { state: { order: newOrder } });
   };
 

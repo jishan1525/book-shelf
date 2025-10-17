@@ -3,19 +3,20 @@ import { useMemo, useState, useEffect } from "react";
 import booksData from "../data/booksData";
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
+import { toast } from "react-toastify";
 
 const ProductListing = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-  //homepage to Lisitng page
   const categoryFromURL = new URLSearchParams(location.search).get("category");
   useEffect(() => {
     if (categoryFromURL) {
       setSelectedGenres([categoryFromURL]);
     }
   }, [categoryFromURL]);
+
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
 
@@ -53,6 +54,16 @@ const ProductListing = () => {
     setSelectedGenres([]);
     setMinRating(0);
     setSortOrder("");
+  };
+
+  const handleAddToCart = (book) => {
+    addToCart(book);
+    toast.success(`${book.title} added to cart!`);
+  };
+
+  const handleAddToWishlist = (book) => {
+    addToWishlist(book);
+    toast.info(`${book.title} added to wishlist!`);
   };
 
   return (
@@ -144,13 +155,13 @@ const ProductListing = () => {
                     <div className="card-body">
                       <button
                         className="btn btn-primary btn-sm me-2"
-                        onClick={() => addToCart(book)}
+                        onClick={() => handleAddToCart(book)}
                       >
                         Add to Cart
                       </button>
                       <button
                         className="btn btn-outline-secondary btn-sm"
-                        onClick={() => addToWishlist(book)}
+                        onClick={() => handleAddToWishlist(book)}
                       >
                         Add to Wishlist
                       </button>
