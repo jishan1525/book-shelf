@@ -1,15 +1,32 @@
 import { useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
-import booksData from "../data/booksData";
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
+import { useEffect, useState } from "react";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
+  const [bookData,setBookData] = useState(null)
+  const [loading,setLoading] = useState(true);
 
-  const bookData = booksData.find((book) => book.id === Number(id));
+  useEffect(() => {
+      const getBooksById = async () => {
+        try {
+          const response = await fetch(`https://book-shelf-backend.vercel.app/books/${id}`);
+          const data = await response.json();
+          setBookData(data.data || []);
+          console.log(bookData)
+        } catch (error) {
+          console.error("Error fetching books:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      getBooksById();
+    }, []);
+
 
   if (!bookData) {
     return <h2 className="text-center mt-5 text-danger">Book not found</h2>;
@@ -44,6 +61,9 @@ const ProductDetail = () => {
       });
     }
   };
+  if(loading){
+    return <h5 className="text-center mt-5">Loading...</h5>
+  }
 
   return (
     <div className="container mt-5 mb-4">

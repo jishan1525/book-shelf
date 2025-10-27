@@ -1,90 +1,102 @@
 import NavBar from "../components/NavBar";
+import { Container, Card, Row, Col } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const PrivacyPolicy = () => {
   return (
-    <div>
-     
-      <div className="container my-5">
-        <h1 className="fw-bold mb-4 text-center">📚 Bookshelf Privacy Policy</h1>
-        <p className="text-muted text-center mb-5">
-          Last Updated: October 2025
-        </p>
+    <div className="d-flex flex-column min-vh-100 bg-light">
+      <NavBar />
+      <Container className="py-5 flex-grow-1">
+        <Row className="justify-content-center">
+          <Col md={10} lg={8}>
+            <Card className="shadow-sm border-0 mb-5">
+              <Card.Body className="p-5">
+                <h1 className="display-4 fw-bold text-center text-primary mb-3">
+                  📚 Bookshelf Privacy Policy
+                </h1>
+                <p className="text-muted text-center mb-5">
+                  Last Updated: October 2025
+                </p>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">1. Introduction</h4>
-          <p>
-            Welcome to <strong>Bookshelf</strong>. Your privacy is important to us.
-            This Privacy Policy explains how we collect, use, and protect your
-            personal information when you use our website and services.
-          </p>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">1. Introduction</h4>
+                  <p className="text-secondary">
+                    Welcome to <strong>Bookshelf</strong>. Your privacy is our priority. This Privacy Policy outlines how we collect, use, and safeguard your personal information when you use our website and services.
+                  </p>
+                </section>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">2. Information We Collect</h4>
-          <p>We may collect the following types of information:</p>
-          <ul>
-            <li><strong>Personal Information:</strong> such as your name, email address, and contact details when you register or place an order.</li>
-            <li><strong>Usage Data:</strong> including pages visited, time spent, and your interactions on the site.</li>
-            <li><strong>Payment Information:</strong> handled securely through third-party payment gateways. We do not store card details.</li>
-          </ul>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">2. Information We Collect</h4>
+                  <p className="text-secondary">We may collect the following types of information:</p>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item border-0 ps-0">
+                      <strong>Personal Information:</strong> Name, email address, and contact details provided during registration or order placement.
+                    </li>
+                    <li className="list-group-item border-0 ps-0">
+                      <strong>Usage Data:</strong> Information about pages visited, time spent, and interactions on our site.
+                    </li>
+                    <li className="list-group-item border-0 ps-0">
+                      <strong>Payment Information:</strong> Securely processed through trusted third-party payment gateways. We do not store your card details.
+                    </li>
+                  </ul>
+                </section>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">3. How We Use Your Information</h4>
-          <p>We use the collected data to:</p>
-          <ul>
-            <li>Process and manage your book orders.</li>
-            <li>Improve our website, user experience, and customer support.</li>
-            <li>Send order confirmations, updates, and promotional offers (only if you consent).</li>
-          </ul>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">3. How We Use Your Information</h4>
+                  <p className="text-secondary">We use your data to:</p>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item border-0 ps-0">Process and manage your book orders.</li>
+                    <li className="list-group-item border-0 ps-0">Enhance our website, user experience, and customer support.</li>
+                    <li className="list-group-item border-0 ps-0">Send order confirmations, updates, and promotional offers (with your consent).</li>
+                  </ul>
+                </section>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">4. Data Protection</h4>
-          <p>
-            We use industry-standard security measures to protect your personal
-            information. However, please note that no online platform can
-            guarantee 100% data security.
-          </p>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">4. Data Protection</h4>
+                  <p className="text-secondary">
+                    We implement industry-standard security measures to protect your personal information. However, no online platform can guarantee complete data security.
+                  </p>
+                </section>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">5. Cookies</h4>
-          <p>
-            Bookshelf uses cookies to improve your browsing experience and
-            analyze website traffic. You can choose to disable cookies in your
-            browser settings.
-          </p>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">5. Cookies</h4>
+                  <p className="text-secondary">
+                    Bookshelf uses cookies to enhance your browsing experience and analyze website traffic. You can disable cookies via your browser settings.
+                  </p>
+                </section>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">6. Third-Party Services</h4>
-          <p>
-            We may use trusted third-party tools (like analytics and payment
-            providers) that collect data in accordance with their own privacy
-            policies.
-          </p>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">6. Third-Party Services</h4>
+                  <p className="text-secondary">
+                    We may use trusted third-party tools (e.g., analytics and payment providers) that collect data per their own privacy policies.
+                  </p>
+                </section>
 
-        <section className="mb-4">
-          <h4 className="fw-semibold mb-2">7. Your Rights</h4>
-          <p>
-            You have the right to access, update, or delete your personal
-            information. You can contact us anytime to request changes or
-            account deletion.
-          </p>
-        </section>
+                <section className="mb-5">
+                  <h4 className="fw-semibold mb-3 text-dark">7. Your Rights</h4>
+                  <p className="text-secondary">
+                    You have the right to access, update, or delete your personal information. Contact us to request changes or account deletion.
+                  </p>
+                </section>
 
-        <section className="mb-5">
-          <h4 className="fw-semibold mb-2">8. Contact Us</h4>
-          <p>
-            For any privacy-related concerns or questions, please contact us at: <br />
-            <strong>Email:</strong> support@bookshelf.com
-          </p>
-        </section>
-
-        
-      </div>
+                <section>
+                  <h4 className="fw-semibold mb-3 text-dark">8. Contact Us</h4>
+                  <p className="text-secondary">
+                    For privacy-related concerns or questions, please reach out to us at: <br />
+                    <strong>Email:</strong>{" "}
+                    <a href="mailto:support@bookshelf.com" className="text-primary">
+                      support@bookshelf.com
+                    </a>
+                  </p>
+                </section>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+      <footer className="bg-dark text-white text-center py-3">
+        <p className="mb-0">© 2025 Bookshelf. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 };

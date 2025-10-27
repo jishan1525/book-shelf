@@ -1,6 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
-import booksData from "../data/booksData";
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
 import { toast } from "react-toastify";
@@ -9,23 +8,43 @@ const ProductListing = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
+  const categoryFromURL = searchParams.get("category");
 
-  const categoryFromURL = new URLSearchParams(location.search).get("category");
+  const { addToCart } = useCart();
+  const { addToWishlist } = useWishlist();
+
+  const [booksData, setBooksData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [minRating, setMinRating] = useState(0);
+  const [sortOrder, setSortOrder] = useState("");
+
+  //books are coming from backend
+  useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const response = await fetch("https://book-shelf-backend.vercel.app/books");
+        const data = await response.json();
+        setBooksData(data.data || []);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getBooks();
+  }, []);
+
+  // Update selected genre if coming from URL
   useEffect(() => {
     if (categoryFromURL) {
       setSelectedGenres([categoryFromURL]);
     }
   }, [categoryFromURL]);
 
-  const { addToCart } = useCart();
-  const { addToWishlist } = useWishlist();
+  const genres = ["Fiction", "Non-Fiction", "Mystery", "Sci-Fi", "Self-help", "Thriller", "Romance"];
 
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const [minRating, setMinRating] = useState(0);
-  const [sortOrder, setSortOrder] = useState("");
-
-  const genres = ["Fiction", "Non-Fiction", "Mystery", "Sci-Fi"];
-
+  // Apply filters + sorting
   const filteredBooks = useMemo(() => {
     return booksData
       .filter((book) =>
@@ -42,7 +61,7 @@ const ProductListing = () => {
         if (sortOrder === "high-to-low") return b.sellingPrice - a.sellingPrice;
         return 0;
       });
-  }, [selectedGenres, minRating, sortOrder, searchQuery]);
+  }, [booksData, selectedGenres, minRating, sortOrder, searchQuery]);
 
   const toggleGenre = (genre) => {
     setSelectedGenres((prev) =>
@@ -66,12 +85,18 @@ const ProductListing = () => {
     toast.info(`${book.title} added to wishlist!`);
   };
 
+  // Loading State
+  if (loading) {
+    return <div className="text-center mt-5">Loading books...</div>;
+  }
+
   return (
     <div className="container mt-4">
       <h2 className="mb-4 text-center fw-bold">
         Books ({filteredBooks.length})
       </h2>
       <div className="row">
+        {/* Filters */}
         <div className="col-md-3 mb-4">
           <div className="p-3 border rounded shadow-sm">
             <h5 className="fw-bold mb-3">Filters</h5>
@@ -128,14 +153,15 @@ const ProductListing = () => {
           </div>
         </div>
 
+        
         <div className="col-md-9">
           <div className="row g-4">
             {filteredBooks.length > 0 ? (
               filteredBooks.map((book) => (
-                <div key={book.id} className="col-lg-4 col-md-6 col-12">
+                <div key={book._id} className="col-lg-4 col-md-6 col-12">
                   <div className="card h-100 shadow-sm">
                     <Link
-                      to={`/detail/${book.id}`}
+                      to={`/detail/${book._id}`}
                       className="text-decoration-none text-dark"
                     >
                       <img

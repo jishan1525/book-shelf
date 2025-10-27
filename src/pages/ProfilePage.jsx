@@ -9,7 +9,6 @@ const ProfilePage = () => {
     removeAddress,
     updateAddress,
     orders,
-    removeOrder,
   } = useUser();
   
   const formatDate = (dateString) => {
